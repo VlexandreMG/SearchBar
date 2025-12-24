@@ -10,7 +10,7 @@
 
     for (String item : donnee) {
         if (item.startsWith(query.toLowerCase())) {
-            out.println("<div>" + item + "</div>");
+            out.println("<div>" + "<a href='search.jsp?q=" + item + "'>" + item + "</a>" + "</div>");
         }
     }
 %>
