@@ -4,7 +4,21 @@
   <button type="submit">Search</button>
 </form>
 
-<div id="suggestions"></div>
+<div id="suggestions" class="suggestions-container"></div>
+
+<style> 
+  .suggestions-container {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: absolute;
+    margin-top: 5px;
+}
+</style>
 
 <script>
   document.getElementById('searchInput').addEventListener('input', function () {
