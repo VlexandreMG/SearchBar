@@ -5,6 +5,7 @@
 </form>
 
 <div id="suggestions" class="suggestions-container"></div>
+<div id="history"></div>
 
 <style> 
   .suggestions-container {
@@ -21,10 +22,22 @@
 </style>
 
 <script>
+let history = [];
   // Fonction une seule fois
 function handleSuggestionClick(e) {
     console.log('Clicked on suggestion:', e.target.textContent);
     e.preventDefault(); //si tu veux empêcher le lien
+    //Maka an'ilay mot
+    const mot = e.target.textContent;
+    //Mandefa ao anaty tableau
+    history.push(mot);
+    // Affiche l'historique
+    document.getElementById('history').innerHTML = 
+    "Historique: " + history.join(", "); 
+    // Met dans la barre et soumet
+    document.getElementById('searchInput').value = mot;
+    document.querySelector('form').submit();
+
 }
 
 document.getElementById('searchInput').addEventListener('input', function () {
