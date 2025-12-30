@@ -29,14 +29,17 @@ function handleSuggestionClick(e) {
     e.preventDefault(); //si tu veux empêcher le lien
     //Maka an'ilay mot
     const mot = e.target.textContent;
+
     //Mandefa ao anaty tableau
     history.push(mot);
+
     // Affiche l'historique
     document.getElementById('history').innerHTML = 
     "Historique: " + history.join(", "); 
+
     // Met dans la barre et soumet
     document.getElementById('searchInput').value = mot;
-    document.querySelector('form').submit();
+    //document.querySelector('form').submit();
 
 }
 
