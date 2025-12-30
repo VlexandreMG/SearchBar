@@ -21,21 +21,33 @@
 </style>
 
 <script>
-  document.getElementById('searchInput').addEventListener('input', function () {
+  // Fonction une seule fois
+function handleSuggestionClick(e) {
+    console.log('Clicked on suggestion:', e.target.textContent);
+    e.preventDefault(); //si tu veux empêcher le lien
+}
+
+document.getElementById('searchInput').addEventListener('input', function () {
     const query = this.value;
 
     if (query.length === 0) {
-      document.getElementById('suggestions').innerHTML = '';
-      return;
+        document.getElementById('suggestions').innerHTML = '';
+        return;
     } else {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById('suggestions').innerHTML = this.responseText;
-        }
-      };
-      xhr.open('GET', 'suggestions.jsp?q=' + encodeURIComponent(query), true);
-      xhr.send();
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('suggestions').innerHTML = this.responseText;
+                const container = document.querySelector('.suggestions-container');
+                
+                // Retire l'ancien écouteur d'abord (évite les doublons)
+                container.removeEventListener('click', handleSuggestionClick);
+                // Puis ajoute le nouvel
+                container.addEventListener('click', handleSuggestionClick);
+            }
+        };
+        xhr.open('GET', 'suggestions.jsp?q=' + encodeURIComponent(query), true);
+        xhr.send();
     }
-  });
+});
 </script>
