@@ -1,3 +1,14 @@
+<%@ page import="java.util.*" %>
+
+<%  
+    List<String> history = (List<String>) session.getAttribute("history");
+    if (history == null) {
+        history = new ArrayList<>();
+        session.setAttribute("history", history);
+    }
+%>
+
+<a href="history.jsp">Historique</a>
 <h3>Search bar : :D</h3>
 <form action="" method="post">
   <input type="text" name="search" id="searchInput" autocomplete="off">
@@ -25,7 +36,7 @@
 let history = [];
   // Fonction une seule fois
 function handleSuggestionClick(e) {
-    console.log('Clicked on suggestion:', e.target.textContent);
+    //console.log('Clicked on suggestion:', e.target.textContent);
     e.preventDefault(); //si tu veux empêcher le lien
     //Maka an'ilay mot
     const mot = e.target.textContent;
@@ -37,10 +48,22 @@ function handleSuggestionClick(e) {
     document.getElementById('history').innerHTML = 
     "Historique: " + history.join(", "); 
 
+    
+    const form = document.createElement('form');
+    form.method = 'GET';
+    form.action = '';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'mot';
+    input.value = mot;
+
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+
     // Met dans la barre et soumet
     document.getElementById('searchInput').value = mot;
-    //document.querySelector('form').submit();
-
 }
 
 document.getElementById('searchInput').addEventListener('input', function () {
