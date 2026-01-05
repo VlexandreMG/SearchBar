@@ -38,7 +38,7 @@ function handleSuggestionClick(e) {
     "Historique: " + history.join(", "); 
 
     // Met dans la barre et soumet
-    document.getElementById('searchInput').value = mot;
+    //document.getElementById('searchInput').value = mot;
     //document.querySelector('form').submit();
 
 }
