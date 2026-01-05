@@ -1,5 +1,5 @@
 <h3>Search bar : :D</h3>
-<form action="" method="post">
+<form action="search.jsp" method="post">
   <input type="text" name="search" id="searchInput" autocomplete="off">
   <button type="submit">Search</button>
 </form>
