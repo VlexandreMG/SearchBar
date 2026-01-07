@@ -1,3 +1,5 @@
+<%@ page import="java.util.regex.Pattern" %>
+
 <% 
 String query = request.getParameter("q");
 String search = request.getParameter("search");
@@ -10,13 +12,12 @@ String[] tableau = new String[] {
 };
 
 if (search != null && !search.trim().isEmpty()) {
-    String searchLower = search.toLowerCase();
     boolean exactMatchFound = false;
     
     for (String tab : tableau) {
         String tabLower = tab.toLowerCase();
         
-        if (tabLower.equals(searchLower)) {
+        if (tabLower.matches("(?i)^" + Pattern.quote(search) + "$")) {
             out.println("You searched for: " + tab);
             exactMatchFound = true;
             break; // Stop après match exact
@@ -26,7 +27,8 @@ if (search != null && !search.trim().isEmpty()) {
     // Si pas de match exact, cherche les contenus
     if (!exactMatchFound) {
         for (String tab : tableau) {
-            if (tab.toLowerCase().contains(searchLower)) {
+            String tabLow= tab.toLowerCase();
+            if (tabLow.matches("(?i)^" + Pattern.quote(search) + ".*")) {
                 out.println(tab);
             }
         }
