@@ -22,26 +22,26 @@
 </style>
 
 <script>
-let history = [];
+//let history = [];
   // Fonction une seule fois
-function handleSuggestionClick(e) {
-    console.log('Clicked on suggestion:', e.target.textContent);
-    e.preventDefault(); //si tu veux empêcher le lien
+//function handleSuggestionClick(e) {
+    //console.log('Clicked on suggestion:', e.target.textContent);
+    //e.preventDefault(); //si tu veux empêcher le lien
     //Maka an'ilay mot
-    const mot = e.target.textContent;
+    //const mot = e.target.textContent;
 
     //Mandefa ao anaty tableau
-    history.push(mot);
+    //history.push(mot);
 
     // Affiche l'historique
-    document.getElementById('history').innerHTML = 
-    "Historique: " + history.join(", "); 
+    //document.getElementById('history').innerHTML = 
+    //"Historique: " + history.join(", "); 
 
     // Met dans la barre et soumet
     //document.getElementById('searchInput').value = mot;
     //document.querySelector('form').submit();
 
-}
+//} 
 
 document.getElementById('searchInput').addEventListener('input', function () {
     const query = this.value;
@@ -57,9 +57,9 @@ document.getElementById('searchInput').addEventListener('input', function () {
                 const container = document.querySelector('.suggestions-container');
                 
                 // Retire l'ancien écouteur d'abord (évite les doublons)
-                container.removeEventListener('click', handleSuggestionClick);
+                    //container.removeEventListener('click', handleSuggestionClick);
                 // Puis ajoute le nouvel
-                container.addEventListener('click', handleSuggestionClick);
+                    //container.addEventListener('click', handleSuggestionClick);
             }
         };
         xhr.open('GET', 'suggestions.jsp?q=' + encodeURIComponent(query), true);

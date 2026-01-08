@@ -10,9 +10,6 @@ if (history == null) {
 String query = request.getParameter("q");
 String search = request.getParameter("search");
 
-history.add(search);
-session.setAttribute("history", history);
-
 String[] tableau = new String[] {
     "animal", "arbre", "avion", "amour", "ame", "amere", "amerde", "argent",
     "banane", "ballon", "bateau", "bonjour", "bouteille", 
@@ -29,8 +26,9 @@ if (search != null && !search.trim().isEmpty()) {
         if (tabLower.matches("(?i)^" + Pattern.quote(search) + "$")) {
             out.println("You searched for: " + tab);
             exactMatchFound = true;
+            history.add(search);
+            session.setAttribute("history", history);
             break; // Stop après match exact
-
         }
     }
     
@@ -46,6 +44,8 @@ if (search != null && !search.trim().isEmpty()) {
     
 } else if (query != null && !query.trim().isEmpty()) {
     out.println("You clicked on: " + query);
+    history.add(query);
+    session.setAttribute("history", history);
 } else {
     out.println("No search query provided");
 }
