@@ -1,8 +1,17 @@
-<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.*, java.util.regex.Pattern" %>
 
 <% 
+List<String> history = (List<String>) session.getAttribute("history");
+
+if (history == null) {
+    history = new ArrayList<>();
+}
+
 String query = request.getParameter("q");
 String search = request.getParameter("search");
+
+history.add(search);
+session.setAttribute("history", history);
 
 String[] tableau = new String[] {
     "animal", "arbre", "avion", "amour", "ame", "amere", "amerde", "argent",
@@ -21,6 +30,7 @@ if (search != null && !search.trim().isEmpty()) {
             out.println("You searched for: " + tab);
             exactMatchFound = true;
             break; // Stop après match exact
+
         }
     }
     
