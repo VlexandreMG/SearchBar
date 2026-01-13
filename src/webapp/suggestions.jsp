@@ -5,7 +5,8 @@
     if (query == null) query = "";
     
     List<String> history = (List<String>) session.getAttribute("history");
-    
+    //String[] newArray = new String[history.length];
+     
     String[] donnee = new String[] {
         "animal", "arbre", "avion", "amour","ame","amere","amerde", "argent",
         "banane", "ballon", "bateau", "bonjour", "bouteille", 
@@ -13,15 +14,27 @@
         "dormir", "danser", "dinde", "drapeau", "douceur"
     };
 
-    // AFFICHER l'historique seulement si l'utilisateur a tapé quelque chose
+    // AFFICHER l'historiwque seulement si l'utilisateur a tapé quelque chose
     if (!query.trim().isEmpty()) {
         // 1. D'abord afficher l'historique si c'est pertinent
-        if (history != null && !history.isEmpty()) {
-            for (String hist : history) {
-                out.println("<div class='history-item'>📜<a href='search.jsp?q=" + hist + "'>" + hist + "</a></div>");
+        
+    if (history != null && !history.isEmpty()) {
+        List<String> dejaVus = new ArrayList<>();
+        
+        for (String hist : history) {
+            if (hist.toLowerCase().contains(query.toLowerCase())) {
+                // Évite les doublons
+                if (!dejaVus.contains(hist)) {
+                    dejaVus.add(hist);
+                    out.println("<div class='history-item'>📜<a href='search.jsp?q=" + hist + "'>" + hist + "</a></div>");
+                }
             }
-            out.println("<hr>"); // Séparateur
         }
+        
+        if (!dejaVus.isEmpty()) {
+            out.println("<hr>");
+        }
+    }
         
         // 2. Ensuite les suggestions normales
         for (String item : donnee) {
