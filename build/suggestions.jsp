@@ -26,15 +26,26 @@
                 // Évite les doublons
                 if (!dejaVus.contains(hist)) {
                     dejaVus.add(hist);
-                    out.println("<div class='history-item'>📜<a href='search.jsp?q=" + hist + "'>" + hist + "</a></div>");
+                    out.println("<div class='history-item' id='hist-"+ hist +"'>📜<a href='search.jsp?q=" + hist + "'>" + hist + "</a><button class='delete-button'>X</button></div>");   
                 }
             }
         }
         
+         
         if (!dejaVus.isEmpty()) {
             out.println("<hr>");
         }
     }
+    <script>
+document.addEventListener('click', function(e) {
+    // Vérifie la classe du bouton
+    if (e.target.classList.contains('delete-btn')) {
+        const historyItem = e.target.closest('.history-item');
+        console.log('History item:', historyItem);
+        console.log('Mot:', historyItem ? historyItem.textContent : 'non trouvé');
+    }
+});
+</script>
         
         // 2. Ensuite les suggestions normales
         for (String item : donnee) {
@@ -44,3 +55,18 @@
         }
     }
 %>
+
+<%-- <script> 
+function erase(mot) {
+var history = document.getElementById("hist-"+ mot);
+console.log(history);
+}
+</script>  --%>
+
+ <%-- <script>
+    document.addEventListener('click', function (e) {
+    const el = e.target.closest('.history-item');    
+    console.log(el);
+    });
+</script> --%>
+
